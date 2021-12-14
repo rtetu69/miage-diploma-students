@@ -39,7 +39,6 @@ import com.google.common.io.ByteStreams;
 public class Main {
 	public static final String HOST = "localhost";
 	public static final int PORT = 7000;
-	private static final Logger logger = Logger.getLogger(Main.class.getName());
 	private static StudentRepository studentRepo = StudentRepository.withDB("src/main/resources/students.db");
 
 	public static void main(String[] args) throws IOException, URISyntaxException {
@@ -65,9 +64,9 @@ public class Main {
 		ArrayList<Student> students = new ArrayList<>();
 		Iterables.addAll(students, repo);
 
-		for (int i = 0; i < students.size(); i++) {
-			if (i == studentId) {
-				return students.get(i);
+		for (Student etudiant : students) {
+			if (etudiant.getId() == studentId) {
+				return etudiant;
 			}
 		}
 
