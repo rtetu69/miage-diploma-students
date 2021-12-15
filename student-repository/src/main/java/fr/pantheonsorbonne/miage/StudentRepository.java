@@ -29,7 +29,7 @@ public class StudentRepository implements Iterable<Student> {
 		return Arrays.asList(stu.getName(), stu.getTitle(), "" + stu.getId());
 	}
 
-	public StudentRepository add(Student s) {
+	public StudentRepository add(Student s){
 		Iterator<Student> previousContent = StudentRepository.withDB(this.db).iterator();
 		try (FileWriter writer = new FileWriter(this.db)) {
 			CSVPrinter csvFilePrinter = new CSVPrinter(writer, CSVFormat.DEFAULT);
@@ -38,7 +38,7 @@ public class StudentRepository implements Iterable<Student> {
 				try {
 					csvFilePrinter.printRecord(toReccord(student));
 				} catch (IOException e) {
-					throw new MyRuntimeException("failed to update db file");
+					throw new MyRuntimeException("failed to update db file", e);
 				}
 			});
 			csvFilePrinter.printRecord(toReccord(s));
@@ -46,7 +46,7 @@ public class StudentRepository implements Iterable<Student> {
 			csvFilePrinter.close(true);
 
 		} catch (IOException e) {
-			throw new MyRuntimeException("failed to update db file");
+			throw new MyRuntimeException("failed to update db file", e);
 		}
 		return this;
 
@@ -59,7 +59,7 @@ public class StudentRepository implements Iterable<Student> {
 
 			CSVParser parser = CSVParser.parse(reader, CSVFormat.DEFAULT);
 			currentIterator = parser.getRecords().stream()
-					.map(reccord -> new Student(Integer.parseInt(reccord.get(2)), reccord.get(0), reccord.get(1)))
+					.map(reccord -> new Student(Integer.parseInt(reccord.get(2)), reccord.get(0), reccord.get(1), reccord.get(3)))
 					.map(c -> c).iterator();
 			return currentIterator;
 

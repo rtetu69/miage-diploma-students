@@ -20,7 +20,10 @@ public class DiplomaFileAdapter extends FileGenerator<AbstractDiplomaGenerator> 
 			is.close();
 		} catch (IOException e) {
 			e.printStackTrace();
-			throw new MyRuntimeException("failed to write diploma file", e);
+			
+			throw new RuntimeException("failed to write diploma file", e);
+		} catch (MyRuntimeException e) {
+			e.printStackTrace();
 		}
 	}
 

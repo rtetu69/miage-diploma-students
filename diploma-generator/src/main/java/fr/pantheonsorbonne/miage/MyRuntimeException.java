@@ -1,9 +1,15 @@
 package fr.pantheonsorbonne.miage;
 
+
 public class MyRuntimeException extends RuntimeException {
 
 	public MyRuntimeException(String string, Exception e) {
 
+	}
+
+
+	public MyRuntimeException(String string) {
+	
 	}
 
 	/**
