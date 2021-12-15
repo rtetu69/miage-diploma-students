@@ -5,10 +5,10 @@ public class Student {
 	private int id;
 	private String password;
 
-	public Student(int id, String name, String title, String password) {
+	public Student(int id, String name,String title, String password) {
+		this.id = id;
 		this.name = name;
 		this.title = title;
-		this.id = id;
 		this.password = password;
 	}
 
